@@ -1,0 +1,48 @@
+<button class="btn btn-secondary mt-2 ml-3" (click)="onBack()">
+  <i class="fa fa-arrow-left"></i>
+</button>
+<div class="container">
+
+    <h3 class="text-center font-weight-bold text-title">{{ editMode ? "Edit" : "Add new" }}</h3>
+    <form (ngSubmit)="onSubmit()" #f="ngForm">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" name="name" #name="ngModel" ngModel required>
+            <span class="text-danger" *ngIf="!name.valid && name.touched">Please enter name</span>
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" name="price" #price="ngModel" ngModel required pattern="^[1-9]+[0-9]*$">
+            <span class="text-danger" *ngIf="!price.valid && price.touched">Please enter price</span>
+
+        </div>
+        <div class="form-group">
+            <label for="Quantity">Quantity</label>
+            <input type="number" class="form-control" id="quantity" name="quantity" #quantity="ngModel" ngModel required pattern="^[1-9]+[0-9]*$">
+            <span class="text-danger" *ngIf="!quantity.valid && quantity.touched">Please enter quantity</span>
+
+        </div>
+        <div class="form-group">
+            <label for="status">Status</label>
+            <select id="status" class="form-control" [ngModel]="defaultStatus" name="status">
+            <option value="enable" >Enable</option>
+            <option value="disable">Disable</option>
+        </select>
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <textarea type="text" class="form-control" id="description" name="description" ngModel required #description="ngModel"></textarea>
+            <span class="text-danger" *ngIf="!description.valid && description.touched">Please enter Description</span>
+
+        </div>
+        <div class="form-group">
+            <label for="imgPath">Img Url</label>
+            <input type="text" class="form-control" id="imgPath" name="imgPath" ngModel>
+        </div>
+
+        <button type="button" class="btn btn-primary mr-2" type="submit" [disabled]="!f.valid">Save</button>
+        <button type="button" class="btn btn-primary" (click)="onClear()">Clear</button>
+
+
+    </form>
+</div>

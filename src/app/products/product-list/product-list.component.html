@@ -1,0 +1,59 @@
+<button class="btn btn-success btn-add mt-3" (click)="onAddNew()" type="button">Add new</button>
+
+<div class="container">
+    <p class="alert alert-danger" *ngIf="error$ | async as error">{{ error }}</p>
+    <div *ngIf="isLoading" style="text-align: center;">
+        <app-loading-spinner></app-loading-spinner>
+    </div>
+    <div *ngIf="!isLoading">
+        <div class="form-group">
+            <label for="search">Search</label>
+            <input type="text" id="search" class="form-control mb-2" [(ngModel)]="filteredName" placeholder="Enter name to search">
+        </div>
+
+
+        <table class="table table-responsive-sm table-hover">
+            <thead>
+                <tr>
+                    <th>No.</th>
+                    <th>Name</th>
+                    <th>Image</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of (products$) | async | filterByName: filteredName: 'name'; let i = index">
+                    <td>{{ i + 1 }}</td>
+                    <td>{{ product.name }}</td>
+                    <td>
+                        <img [src]="product.imgPath" alt="{{ product.name }}" style="height: 100px; width: 100px;">
+                    </td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.quantity }}</td>
+                    <td>
+                        <span class="badge badge-pill badge-{{ product.status == 'enable' ? 'success' : 'danger' }}">{{ product.status }}</span>
+                    </td>
+                    <td>
+
+                        <button class="btn btn-warning mr-2" type="button" (click)="onUpdate(product.id)">
+                      <i class="fa fa-edit"></i>
+                    </button>
+
+                        <button class="btn btn-danger mr-2" type="button" (click)="onDelete(product.id)">
+                      <i class="fa fa-trash"></i>
+                    </button>
+                        <button class="btn btn-info" type="button" (click)="onViewDetail(product.id)">
+                      <span>View</span>
+                    </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<!-- start -->

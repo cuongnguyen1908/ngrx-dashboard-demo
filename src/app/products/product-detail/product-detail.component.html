@@ -1,0 +1,25 @@
+<button class="btn btn-secondary mt-2 ml-3" (click)="onBack()">
+  <i class="fa fa-arrow-left"></i>
+</button>
+<div class="container">
+    <app-loading-spinner *ngIf="isLoading" style="text-align: center;"></app-loading-spinner>
+    <div *ngIf="!isLoading" class="mt-5">
+        <h3 class="font-weight-bold">{{ product.name }}</h3>
+        <img [src]="product.imgPath" alt="{{ product.name }}" style="max-width: 300px; max-height: 300px;">
+        <p>
+            <span class="font-weight-bold">Price: </span> ${{product.price}}
+        </p>
+        <p>
+            <span class="font-weight-bold">Quantity: </span> {{product.quantity}}
+        </p>
+        <p>
+            <span class="font-weight-bold">Status: </span> {{product.status}}
+        </p>
+        <p>
+            <span class="font-weight-bold">Description: </span> {{ product.description }}
+        </p>
+        <button class="btn btn-warning mr-2" type="button" (click)="onUpdate()">
+          <i class="fa fa-edit"> Edit</i>
+        </button>
+    </div>
+</div>
